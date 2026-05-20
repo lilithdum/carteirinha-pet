@@ -1,0 +1,303 @@
+/* DESIGN STYLE PALETTE ROOT CONFIGURATION */
+:root {
+    --earth-brown: #442D1C;
+    --sage-green: #34592B;
+    --soft-cream: #D8D1A7;
+    --clay: #9D9167;
+    --white: #442D1C;
+    --terracotta: #743014;
+    --light-text: #D8D1A7;
+}
+
+/* BASE APPLICATION CONFIGURATION */
+body { 
+    background-color: var(--soft-cream); 
+    background-image: url('images/fundo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Quicksand', sans-serif; 
+    color: var(--light-text); 
+    margin: 0; 
+    display: flex;
+    flex-direction: column;
+    height: 100vh; 
+    overflow: hidden;
+}
+
+/* TOP HEADER BANNER ELEMENT */
+.app-banner {
+    width: 100%;
+    height: 160px;
+    background-image: url('images/banner.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    box-sizing: border-box;
+    border-bottom: 3px solid var(--sage-green);
+}
+
+.banner-overlay {
+    background: rgba(68, 45, 28, 0.4);
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 80px;
+}
+
+.banner-overlay h1 {
+    color: #ffffff;
+    font-family: 'Lora', serif;
+    font-size: 2.2rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* NAVIGATION MENU BAR TRIGGER BUTTON */
+.menu-toggle {
+    background: var(--terracotta);
+    border: none;
+    color: #ffffff;
+    font-size: 1.8rem;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    position: absolute;
+    left: 20px;
+    z-index: 100;
+    transition: 0.2s;
+}
+.menu-toggle:hover { background: #322114; }
+
+/* CENTRAL WORKSPACE GRID */
+.app-container {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+/* LEFT NAVIGATION MENU CONTAINER */
+.sidebar { 
+    width: 280px; 
+    background: var(--white); 
+    border-right: 2px solid var(--clay); 
+    display: flex; 
+    flex-direction: column; 
+    padding: 20px; 
+    box-sizing: border-box;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+}
+
+/* Sidebar closed state rules */
+.sidebar.hidden {
+    width: 0;
+    padding: 20px 0;
+    border-right: none;
+    overflow: hidden;
+}
+
+.sidebar button { 
+    background: none; 
+    border: none; 
+    text-align: left; 
+    padding: 15px; 
+    font-size: 1rem; 
+    font-weight: 600; 
+    cursor: pointer; 
+    color: var(--light-text); 
+    border-radius: 10px; 
+    margin-bottom: 8px; 
+    transition: 0.2s; 
+    white-space: nowrap;
+}
+.sidebar button:hover, .sidebar button.active { background: var(--sage-green); color: #ffffff; }
+
+/* PANEL TRANSITION VIEW AREA */
+main { 
+    flex-grow: 1; 
+    padding: 0; 
+    overflow-y: auto; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.view { 
+    display: none; 
+    width: 100%; 
+    max-width: 950px; 
+    padding: 40px; 
+    box-sizing: border-box; 
+    animation: fadeIn 0.3s ease; 
+}
+.view.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* DASHBOARD GRID AND PROFILES */
+.profile-layout-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 25px;
+    width: 100%;
+}
+
+.tutor-hero-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px !important;
+}
+
+.tutor-hero-card h2 {
+    margin: 8px 0 2px 0;
+    font-size: 1.25rem;
+}
+
+.tutor-hero-card p {
+    margin: 0 0 10px 0;
+    font-size: 0.85rem;
+    color: var(--clay);
+}
+
+.tutor-avatar { 
+    width: 90px; 
+    height: 90px; 
+    border-radius: 50%; 
+    border: 3px solid var(--clay); 
+    background: #555; 
+    object-fit: cover; 
+}
+
+/* COMPACT BACKUP CONTACT DISPLAY AREA */
+.backup-contact-box {
+    margin-top: 5px;
+    padding: 8px;
+    background: #322114;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+    border: 1px solid var(--clay);
+}
+.backup-contact-box h4 { margin: 0 0 5px 0; color: var(--terracotta); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.5px;}
+
+.backup-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+}
+.backup-contact-box p { 
+    margin: 0; 
+    color: #ffffff; 
+    font-size: 0.75rem;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+}
+
+.dashboard-pets-section h3 { color: var(--earth-brown); margin-top: 0; }
+.view h1 { color: var(--earth-brown); }
+
+/* PET OUTPUT BADGES IMAGE ROW */
+.pet-overlay-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.pet-photo-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    background: var(--clay);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.pet-photo-card:hover { transform: scale(1.03); }
+.pet-photo-card img { width: 100%; height: 100%; object-fit: cover; }
+
+.pet-name-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    color: #ffffff;
+    padding: 15px 10px 10px 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* DATA CONTAINMENT BOX CARDS */
+.card-box { 
+    background: var(--white); 
+    padding: 30px; 
+    border-radius: 20px; 
+    border: 1px solid var(--clay); 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+    margin-bottom: 20px; 
+    box-sizing: border-box;
+    color: var(--light-text);
+}
+.card-box h3, .card-box h2 { color: var(--light-text); }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.full { grid-column: span 2; }
+label { color: var(--light-text); }
+
+/* INPUT FORM ELEMENTS AND SELECTS STYLE */
+input, select, textarea { 
+    width: 100%; padding: 12px; margin-top: 5px; 
+    border: 1.5px solid var(--clay); border-radius: 10px; 
+    box-sizing: border-box; font-family: 'Quicksand', sans-serif; color: #ffffff;
+    background: #322114;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='10' height='10' viewBox='0 0 10 10'><path fill='%23D8D1A7' d='M0 3l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 40px;
+}
+
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--sage-green); }
+
+/* IMAGE DRAG FILE DROP STYLING BOXES */
+.drop-zone {
+    border: 2px dashed var(--clay);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    background: #322114;
+    color: var(--light-text);
+    cursor: pointer;
+    margin-top: 5px;
+    transition: 0.2s;
+    font-size: 0.9rem;
+}
+.drop-zone:hover { border-color: var(--sage-green); background: #25180e; }
+
+/* ACTION EXECUTION BUTTONS */
+.btn-main { 
+    background: var(--terracotta); color: #ffffff; border: none; 
+    padding: 15px; border-radius: 10px; font-weight: 600; 
+    cursor: pointer; margin-top: 10px; width: 100%; transition: 0.2s; 
+    font-family: 'Quicksand', sans-serif;
+}
+.btn-main:hover { opacity: 0.9; transform: scale(1.01); }
+.btn-edit { background: #5c85d6; color: #ffffff; }
+
+.med-label { color: var(--terracotta); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; display: block; margin-top: 10px; }

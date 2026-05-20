@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carteirinha Pet</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- SITE BANNER HEADER -->
+    <header class="app-banner">
+        <!-- 3-bar menu toggle button -->
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <div class="banner-overlay">
+            <h1>Carteirinha Pet</h1>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <!-- SIDEBAR NAVIGATION MENU (Starts hidden/closed) -->
+        <nav id="sidebar" class="sidebar hidden">
+            <button onclick="showView('profile')" id="btn-profile" class="active">Painel Principal</button>
+            <button onclick="showView('reg-tutor')" id="btn-reg-tutor">Registrar Tutor</button>
+            <button onclick="showView('reg-pet')" id="btn-reg-pet">Registrar Pet</button>
+        </nav>
+
+        <!-- MAIN APP CONTENT PANELS -->
+        <main>
+            <!-- DASHBOARD SCREEN -->
+            <div id="profile" class="view active">
+                <div class="profile-layout-grid">
+                    
+                    <!-- Single Tutor Hero Profile Box (Compact sizing) -->
+                    <div id="tutor-hero" class="card-box tutor-hero-card">
+                        <img src="https://placeholder.com" class="tutor-avatar" id="hero-img" alt="Foto do Tutor">
+                        <h2 id="hero-name">Nenhum Tutor Cadastrado</h2>
+                        <p id="hero-address"></p>
+                        
+                        <!-- Backup Contact Display Sub-card -->
+                        <div id="backup-contact-display" class="backup-contact-box" style="display: none;">
+                            <h4>Contato Reserva</h4>
+                            <div class="backup-grid">
+                                <p id="hero-backup-name"></p>
+                                <p id="hero-backup-phone"></p>
+                                <p id="hero-backup-address" class="backup-full"></p>
+                            </div>
+                        </div>
+
+                        <div id="tutor-edit-action-container"></div>
+                    </div>
+
+                    <!-- Pet Photo Grid Layout -->
+                    <div class="dashboard-pets-section">
+                        <h3>Animais de Estimação</h3>
+                        <div class="pet-overlay-grid" id="hero-pets"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TUTOR REGISTRATION FORM -->
+            <div id="reg-tutor" class="view">
+                <h1 id="tutor-form-title">Registrar Tutor</h1>
+                <div class="card-box">
+                    <div class="grid">
+                        <!-- Main Owner Information -->
+                        <div class="full"><h3>Dados do Tutor Principal</h3></div>
+                        <div class="full"><label>Nome Completo</label><input type="text" id="tName"></div>
+                        <div><label>Telefone</label><input type="text" id="tPhone"></div>
+                        <div><label>E-mail</label><input type="email" id="tEmail"></div>
+                        <div class="full"><label>Endereço Completo</label><input type="text" id="tAddr"></div>
+                        
+                        <!-- Backup Contact Form Inputs -->
+                        <div class="full" style="margin-top: 20px;"><h3>Dados do Contato Reserva</h3></div>
+                        <div class="full"><label>Nome do Contato Reserva</label><input type="text" id="tBackupName"></div>
+                        <div><label>Telefone Reserva</label><input type="text" id="tBackupPhone"></div>
+                        <div><label>Endereço Reserva</label><input type="text" id="tBackupAddr"></div>
+                        
+                        <!-- Image Upload Component -->
+                        <div class="full" style="margin-top: 20px;">
+                            <label>Arraste e Solte a Foto do Tutor Aqui</label>
+                            <div id="tDropZone" class="drop-zone" ondragover="handleDragOver(event)" ondrop="handleTutorDrop(event)" onclick="triggerFileInput('tFileInput')">
+                                Arrastar imagem do seu explorador de arquivos ou clicar aqui
+                            </div>
+                            <input type="file" id="tFileInput" accept="image/*" style="display: none;" onchange="handleTutorFileSelect(event)">
+                        </div>
+                    </div>
+                    <button class="btn-main" onclick="saveTutor()">Salvar Dados do Tutor</button>
+                </div>
+            </div>
+
+            <!-- PET REGISTRATION FORM -->
+            <div id="reg-pet" class="view">
+                <h1 id="pet-form-title">Registrar Novo Pet</h1>
+                <div class="card-box">
+                    <input type="hidden" id="edit-pet-idx" value="-1">
+                    <div class="grid">
+                        <div><label>Nome</label><input type="text" id="pName"></div>
+                        <div><label>Espécie</label><input type="text" id="pSpecies"></div>
+                        <div><label>Cor</label><input type="text" id="pColor"></div>
+                        <div><label>Gênero</label><select id="pGender"><option>Macho</option><option>Fêmea</option></select></div>
+                        <div><label>Comprimento do Pelo</label><input type="text" id="pFur"></div>
+                        <div><label>Idade (Anos)</label><input type="number" id="pAge"></div>
+                        <div class="full"><label>Data de Nascimento</label><input type="date" id="pBirth"></div>
+                        
+                        <!-- Image Upload Component -->
+                        <div class="full">
+                            <label>Arraste e Solte a Foto do Pet Aqui</label>
+                            <div id="pDropZone" class="drop-zone" ondragover="handleDragOver(event)" ondrop="handlePetDrop(event)" onclick="triggerFileInput('pFileInput')">
+                                Arrastar imagem do seu explorador de arquivos ou clicar aqui
+                            </div>
+                            <input type="file" id="pFileInput" accept="image/*" style="display: none;" onchange="handlePetFileSelect(event)">
+                        </div>
+                        
+                        <!-- Health Record Sections -->
+                        <div class="full"><label class="med-label">Vacinas</label><textarea id="pVac"></textarea></div>
+                        <div class="full"><label class="med-label">Alergias</label><textarea id="pAlg"></textarea></div>
+                        <div class="full"><label class="med-label">Cirurgias / Histórico Médico</label><textarea id="pSur"></textarea></div>
+                    </div>
+                    <button class="btn-main" onclick="savePet()">Salvar Pet</button>
+                    <div id="pet-delete-action-container"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
